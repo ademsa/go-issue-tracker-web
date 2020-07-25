@@ -1,0 +1,181 @@
+scalar DateTime
+
+interface Node {
+    id: ID!
+}
+
+type PageInfo{
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+    endCursor: String
+}
+
+type Label implements Node {
+    id: ID!
+    name: String!
+    colorHexCode: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type LabelEdge{
+    node: Label
+    cursor: String!
+}
+
+type LabelConnection {
+    pageInfo: PageInfo!
+    edges: [LabelEdge]
+}
+
+type Project implements Node {
+    id: ID!
+    name: String!
+    description: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type Issue implements Node {
+    id: ID!
+    title: String!
+    description: String!
+    status: Int!
+    projectId: Int!
+    project: Project!
+    labels(first: Int, last: Int, before: String, after: String): LabelConnection
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type Query implements Node {
+    issue(id: ID!): Issue
+    issues(title: String, projectId: String, labels: String): [Issue]
+    label(id: ID!): Label
+    labels(name: String): [Label]
+    allLabels: [Label]
+    project(id: ID!): Project
+    projects(name: String): [Project]
+    allProjects: [Project]
+    node(id: ID!): Node
+}
+
+input AddIssueInput {
+    title: String!
+    description: String!
+    status: Int!
+    projectId: Int!
+    labels: String!
+    clientMutationId: String
+}
+
+type AddIssuePayload {
+    issue: Issue
+    clientMutationId: String
+}
+
+input UpdateIssueInput {
+    id: ID!
+    title: String!
+    description: String!
+    status: Int!
+    labels: String!
+    clientMutationId: String
+}
+
+type UpdateIssuePayload {
+    issue: Issue!
+    clientMutationId: String
+}
+
+input RemoveIssueInput {
+    id: ID!
+    clientMutationId: String
+}
+
+type RemoveIssuePayload {
+    issueId: ID!
+    status: Boolean!
+    clientMutationId: String
+}
+
+input AddLabelInput {
+    name: String!
+    colorHexCode: String
+    clientMutationId: String
+}
+
+type AddLabelPayload {
+    label: Label
+    clientMutationId: String
+}
+
+input UpdateLabelInput {
+    id: ID!
+    name: String!
+    colorHexCode: String
+    clientMutationId: String
+}
+
+type UpdateLabelPayload {
+    label: Label!
+    clientMutationId: String
+}
+
+input RemoveLabelInput {
+    id: ID!
+    clientMutationId: String
+}
+
+type RemoveLabelPayload {
+    labelId: ID!
+    status: Boolean!
+    clientMutationId: String
+}
+
+input AddProjectInput {
+    name: String!
+    description: String
+    clientMutationId: String
+}
+
+type AddProjectPayload {
+    project: Project
+    clientMutationId: String
+}
+
+input UpdateProjectInput {
+    id: ID!
+    name: String!
+    description: String
+    clientMutationId: String
+}
+
+type UpdateProjectPayload {
+    project: Project!
+    clientMutationId: String
+}
+
+input RemoveProjectInput {
+    id: ID!
+    clientMutationId: String
+}
+
+type RemoveProjectPayload {
+    projectId: ID!
+    status: Boolean!
+    clientMutationId: String
+}
+
+type Mutation {
+    addIssue(input: AddIssueInput!): AddIssuePayload
+    updateIssue(input: UpdateIssueInput!): UpdateIssuePayload
+    removeIssue(input: RemoveIssueInput!): RemoveIssuePayload
+    addLabel(input: AddLabelInput!): AddLabelPayload
+    updateLabel(input: UpdateLabelInput!): UpdateLabelPayload
+    removeLabel(input: RemoveLabelInput!): RemoveLabelPayload
+    addProject(input: AddProjectInput!): AddProjectPayload
+    updateProject(input: UpdateProjectInput!): UpdateProjectPayload
+    removeProject(input: RemoveProjectInput!): RemoveProjectPayload
+}
