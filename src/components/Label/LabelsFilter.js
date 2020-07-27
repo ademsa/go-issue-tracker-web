@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles, TextField, Grid, FormControl, FormHelperText } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function LabelsFilter(props) {
+function LabelsFilter(props) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -48,3 +49,9 @@ export default function LabelsFilter(props) {
         </React.Fragment>
     );
 }
+
+LabelsFilter.propTypes = {
+    onChange: PropTypes.func.isRequired,
+}
+
+export default LabelsFilter;

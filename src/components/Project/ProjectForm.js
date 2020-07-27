@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom';
 import { makeStyles, Grid, Button, Paper, TextField, FormControl, FormHelperText, Typography } from '@material-ui/core';
 import { Save, Cancel } from '@material-ui/icons';
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export function ProjectForm(props) {
+function ProjectForm(props) {
     const classes = useStyles();
 
     const initialState = {
@@ -130,6 +131,15 @@ export function ProjectForm(props) {
         </React.Fragment>
     );
 }
+
+ProjectForm.propTypes = {
+    project: PropTypes.object,
+    formTitle: PropTypes.string.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+}
+
+export { ProjectForm };
 
 export default createFragmentContainer(
     ProjectForm,

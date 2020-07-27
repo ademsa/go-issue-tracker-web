@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function LabelsAutocomplete(props) {
+function LabelsAutocomplete(props) {
     const classes = useStyles();
 
     return (
@@ -36,3 +37,11 @@ export default function LabelsAutocomplete(props) {
         </React.Fragment>
     );
 }
+
+LabelsAutocomplete.propTypes = {
+    options: PropTypes.array.isRequired,
+    value: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired,
+}
+
+export default LabelsAutocomplete;

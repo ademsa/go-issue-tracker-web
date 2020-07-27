@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-export default function InfoSnackbar(props) {
+function InfoSnackbar(props) {
     return (
         <React.Fragment>
             <Snackbar
@@ -16,3 +17,12 @@ export default function InfoSnackbar(props) {
         </React.Fragment>
     );
 }
+
+InfoSnackbar.propTypes = {
+    open: PropTypes.bool.isRequired,
+    severity: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
+}
+
+export default InfoSnackbar;

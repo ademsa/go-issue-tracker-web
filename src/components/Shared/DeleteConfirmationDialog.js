@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 
-export default function DeleteConfirmationDialog(props) {
+function DeleteConfirmationDialog(props) {
     return (
         <React.Fragment>
             <Dialog open={props.status}>
@@ -19,3 +20,12 @@ export default function DeleteConfirmationDialog(props) {
         </React.Fragment>
     );
 }
+
+DeleteConfirmationDialog.propTypes = {
+    status: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+}
+
+export default DeleteConfirmationDialog;

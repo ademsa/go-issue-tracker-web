@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom';
 import { makeStyles, Grid, Button, Paper, TextField, FormControl, FormHelperText, Typography } from '@material-ui/core';
 import { Save, Cancel } from '@material-ui/icons';
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export function LabelForm(props) {
+function LabelForm(props) {
     const classes = useStyles();
 
     const initialState = {
@@ -128,6 +129,15 @@ export function LabelForm(props) {
         </React.Fragment>
     );
 }
+
+LabelForm.propTypes = {
+    label: PropTypes.object,
+    formTitle: PropTypes.string.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+}
+
+export { LabelForm };
 
 export default createFragmentContainer(
     LabelForm,

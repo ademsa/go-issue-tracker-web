@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { createFragmentContainer } from 'react-relay';
 import graphql from 'babel-plugin-relay/macro'
+import PropTypes from 'prop-types'
 import { makeStyles, Grid, Button, Paper, MenuItem, InputLabel, Select, TextField, FormControl, FormHelperText, Typography } from '@material-ui/core';
 import { Save, Cancel } from '@material-ui/icons';
 import LabelsAutocomplete from './LabelsAutocomplete';
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export function IssueForm(props) {
+function IssueForm(props) {
     const classes = useStyles();
 
     const initialState = {
@@ -105,7 +106,7 @@ export function IssueForm(props) {
                                 id='project'
                                 name='project'
                                 required
-                                disabled={props.id !== undefined}
+                                disabled={props.issue !== undefined && props.issue !== null}
                                 label='Project'
                                 value={state.project}
                                 onChange={saveState}
@@ -193,6 +194,17 @@ export function IssueForm(props) {
         </React.Fragment>
     );
 }
+
+IssueForm.propTypes = {
+    issue: PropTypes.object,
+    allProjects: PropTypes.array.isRequired,
+    allLabels: PropTypes.array.isRequired,
+    formTitle: PropTypes.string.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+}
+
+export { IssueForm };
 
 export default createFragmentContainer(
     IssueForm,

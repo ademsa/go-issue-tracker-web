@@ -61,6 +61,10 @@ export default function Projects() {
         }));
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - Projects'
+    }, [])
+
     return (
         <React.Fragment>
             <ProjectsFilter onChange={handleFilterChange} />

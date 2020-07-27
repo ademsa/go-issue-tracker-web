@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles, Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -8,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function QRNoItems(props) {
+function QRNoItems(props) {
     const classes = useStyles();
 
     return (
@@ -21,3 +22,9 @@ export default function QRNoItems(props) {
         </React.Fragment>
     );
 }
+
+QRNoItems.propTypes = {
+    message: PropTypes.string.isRequired,
+}
+
+export default QRNoItems;

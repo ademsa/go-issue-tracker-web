@@ -67,6 +67,10 @@ export default function EditProject() {
         }));
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - Edit Project'
+    }, [])
+
     return (
         <React.Fragment>
             <QueryRenderer
@@ -90,9 +94,9 @@ export default function EditProject() {
 
                     return <ProjectForm
                         project={props.node}
+                        formTitle='Edit Project'
                         onCancel={handleCancel}
-                        onSave={handleSave}
-                        formTitle='Edit Project' />
+                        onSave={handleSave} />
                 }}
             />
             <InfoSnackbar

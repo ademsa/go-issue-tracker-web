@@ -77,6 +77,10 @@ export default function Issues() {
         }));
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - Issues'
+    }, [])
+
     return (
         <React.Fragment>
             <QueryRenderer
@@ -107,11 +111,11 @@ export default function Issues() {
 
                     return <React.Fragment>
                         <IssuesFilter
-                            onChange={handleFilterChange}
                             paramProjectId={paramProjectId}
                             paramLabels={paramLabels}
                             projects={props.allProjects}
-                            labels={props.allLabels} />
+                            labels={props.allLabels}
+                            onChange={handleFilterChange} />
                     </React.Fragment>
                 }}
             />
