@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { makeStyles, TextField, MenuItem, Select, Grid, FormControl, FormHelperText } from '@material-ui/core';
 import LabelsAutocomplete from './LabelsAutocomplete';
 import { GetObjIDsAsStringArray } from '../../utils';
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function IssuesFilter(props) {
+function IssuesFilter(props) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -105,3 +106,13 @@ export default function IssuesFilter(props) {
         </React.Fragment>
     );
 }
+
+IssuesFilter.propTypes = {
+    paramProjectId: PropTypes.string,
+    paramLabels: PropTypes.array,
+    projects: PropTypes.array.isRequired,
+    labels: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired,
+}
+
+export default IssuesFilter;

@@ -45,6 +45,10 @@ export default function Home() {
         history.push('/issues?fl=' + event.currentTarget.dataset.id);
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker'
+    }, [])
+
     return (
         <React.Fragment>
             <Grid container spacing={3}>

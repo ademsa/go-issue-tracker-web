@@ -68,6 +68,10 @@ export default function EditLabel() {
         }));
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - Edit Label'
+    }, [])
+
     return (
         <React.Fragment>
             <QueryRenderer
@@ -91,9 +95,9 @@ export default function EditLabel() {
 
                     return <LabelForm
                         label={props.node}
+                        formTitle='Edit Label'
                         onCancel={handleCancel}
-                        onSave={handleSave}
-                        formTitle='Edit Label' />
+                        onSave={handleSave} />
                 }}
             />
             <InfoSnackbar

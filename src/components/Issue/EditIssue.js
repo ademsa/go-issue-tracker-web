@@ -68,6 +68,10 @@ export default function EditIssue() {
         }));
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - Edit Issue'
+    }, [])
+
     return (
         <React.Fragment>
             <QueryRenderer
@@ -101,9 +105,9 @@ export default function EditIssue() {
                         issue={props.node}
                         allProjects={props.allProjects}
                         allLabels={props.allLabels}
+                        formTitle='Edit Issue'
                         onCancel={handleCancel}
-                        onSave={handleSave}
-                        formTitle='Edit Issue' />
+                        onSave={handleSave} />
                 }}
             />
             <InfoSnackbar

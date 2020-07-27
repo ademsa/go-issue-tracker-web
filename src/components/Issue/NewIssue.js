@@ -43,6 +43,10 @@ export default function NewIssue() {
         AddIssueMutation.commit(RelayEnvironment, title, description, status, project, labels, handleSaveError, handleSaveCompleted)
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - New Issue'
+    }, [])
+
     return (
         <React.Fragment>
             <QueryRenderer

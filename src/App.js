@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
 export default function App() {
   const classes = useStyles();
 
+  React.useEffect(() => {
+    document.title = 'Issue Tracker'
+  }, [])
+
   return (
     <div className={classes.Wrapper}>
       <Router>

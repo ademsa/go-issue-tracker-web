@@ -39,6 +39,10 @@ export default function NewProject() {
         AddProjectMutation.commit(RelayEnvironment, name, description, handleSaveError, handleSaveCompleted)
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - New Project'
+    }, [])
+
     return (
         <React.Fragment>
             <ProjectForm

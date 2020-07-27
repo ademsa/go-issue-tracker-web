@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom';
 import { makeStyles, Typography, IconButton, Card, CardContent, CardActions, CardHeader, Avatar, CardActionArea } from '@material-ui/core';
 import { Edit, DeleteForever, Description } from '@material-ui/icons';
@@ -29,14 +30,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ProjectItem(props) {
+function ProjectItem(props) {
     const classes = useStyles();
-
-    const { id, name, description } = props;
 
     const history = useHistory()
     function openProject() {
-        history.push('/projects/' + id);
+        history.push('/projects/' + props.id);
     }
 
     const [state, setState] = React.useState({
@@ -60,7 +59,7 @@ export default function ProjectItem(props) {
             ...prevState,
             deleteConfirmationUI: false,
         }));
-        props.onDelete(id)
+        props.onDelete(props.id)
     }
 
     return (
@@ -68,10 +67,10 @@ export default function ProjectItem(props) {
             <Card className={classes.Card}>
                 <CardActionArea onClick={openProject}>
                     <CardHeader
-                        title={name}
+                        title={props.name}
                         avatar={<Avatar className={classes.CardAvatar}><Description color='secondary' /></Avatar>} />
                     <CardContent>
-                        <Typography>{description}&nbsp;</Typography>
+                        <Typography>{props.description}&nbsp;</Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions className={classes.CardActions} disableSpacing>
@@ -85,10 +84,19 @@ export default function ProjectItem(props) {
                 </CardActions>
             </Card>
             <DeleteConfirmationDialog
-                title={name}
+                title={props.name}
                 status={state.deleteConfirmationUI}
                 onDelete={handleDelete}
                 onCancel={handleDeleteCanceled} />
         </React.Fragment>
     );
 }
+
+ProjectItem.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+}
+
+export default ProjectItem;

@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
 export default function NotFound() {
     const classes = useStyles();
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - Not Found - 404'
+    }, [])
+
     return (
         <React.Fragment>
             <Grid container spacing={3} className={classes.Content}>

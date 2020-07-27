@@ -39,6 +39,10 @@ export default function NewLabel() {
         AddLabelMutation.commit(RelayEnvironment, name, colorHexCode, handleSaveError, handleSaveCompleted)
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - New Label'
+    }, [])
+
     return (
         <React.Fragment>
             <LabelForm

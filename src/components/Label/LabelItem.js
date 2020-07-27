@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types'
 import { makeStyles, Typography, IconButton, Card, CardContent, CardActions, CardHeader, Avatar, CardActionArea } from '@material-ui/core';
 import { Edit, DeleteForever, Description } from '@material-ui/icons';
 import DeleteConfirmationDialog from './../Shared/DeleteConfirmationDialog';
@@ -29,14 +30,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function LabelItem(props) {
+function LabelItem(props) {
     const classes = useStyles();
-
-    const { id, name, colorHexCode } = props;
 
     const history = useHistory()
     function openLabel() {
-        history.push('/labels/' + id);
+        history.push('/labels/' + props.id);
     }
 
     const [state, setState] = React.useState({
@@ -61,7 +60,7 @@ export default function LabelItem(props) {
             ...prevState,
             deleteConfirmationUI: false,
         }));
-        props.onDelete(id)
+        props.onDelete(props.id)
     }
 
     return (
@@ -69,10 +68,10 @@ export default function LabelItem(props) {
             <Card className={classes.Card}>
                 <CardActionArea onClick={openLabel}>
                     <CardHeader
-                        title={name}
+                        title={props.name}
                         avatar={<Avatar className={classes.CardAvatar}><Description color='secondary' /></Avatar>} />
                     <CardContent>
-                        <Typography>{colorHexCode}</Typography>
+                        <Typography>{props.colorHexCode}</Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions className={classes.CardActions} disableSpacing>
@@ -86,10 +85,19 @@ export default function LabelItem(props) {
                 </CardActions>
             </Card>
             <DeleteConfirmationDialog
-                title={name}
+                title={props.name}
                 status={state.deleteConfirmationUI}
                 onDelete={handleDelete}
                 onCancel={handleDeleteCanceled} />
         </React.Fragment>
     );
 }
+
+LabelItem.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    colorHexCode: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+}
+
+export default LabelItem;

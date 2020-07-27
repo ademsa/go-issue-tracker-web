@@ -61,6 +61,10 @@ export default function Labels() {
         }));
     }
 
+    React.useEffect(() => {
+        document.title = 'Issue Tracker - Labels'
+    }, [])
+
     return (
         <React.Fragment>
             <LabelsFilter onChange={handleFilterChange} />

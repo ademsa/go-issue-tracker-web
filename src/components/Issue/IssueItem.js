@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types'
 import { makeStyles, Button, Chip, Typography, IconButton, Card, CardContent, CardActions, CardHeader, Avatar, CardActionArea } from '@material-ui/core';
 import { Edit, DeleteForever, BugReport } from '@material-ui/icons';
 import DeleteConfirmationDialog from './../Shared/DeleteConfirmationDialog';
@@ -29,17 +30,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function IssueItem(props) {
+function IssueItem(props) {
     const classes = useStyles();
-
-    const { id, title, description, project, labels, createdAt } = props;
 
     const history = useHistory();
     function openIssue() {
-        history.push('/issues/' + id);
+        history.push('/issues/' + props.id);
     }
     function openProject() {
-        history.push('/projects/' + project.id);
+        history.push('/projects/' + props.project.id);
     }
     function openLabel(event) {
         history.push('/labels/' + event.currentTarget.dataset.id);
@@ -66,7 +65,7 @@ export default function IssueItem(props) {
             ...prevState,
             deleteConfirmationUI: false,
         }));
-        props.onDelete(id)
+        props.onDelete(props.id)
     }
 
     return (
@@ -74,14 +73,14 @@ export default function IssueItem(props) {
             <Card className={classes.Card}>
                 <CardActionArea onClick={openIssue}>
                     <CardHeader
-                        title={title}
-                        subheader={new Date(createdAt).toLocaleDateString("en-US")}
+                        title={props.title}
+                        subheader={new Date(props.createdAt).toLocaleDateString("en-US")}
                         avatar={<Avatar className={classes.CardAvatar}><BugReport color='secondary' /></Avatar>} />
                     <CardContent>
-                        <Typography>{description}</Typography>
-                        {labels.edges.length > 0 &&
+                        <Typography>{props.description}</Typography>
+                        {props.labels.edges.length > 0 &&
                             <div className={classes.CardLabels}>
-                                {labels.edges.map((label) =>
+                                {props.labels.edges.map((label) =>
                                     <Chip variant='outlined' size='small' key={label.node.id} label={label.node.name} className={classes.CardLabel} clickable={true} data-id={label.node.id} onClick={openLabel} />
                                 )}
                             </div>
@@ -89,7 +88,7 @@ export default function IssueItem(props) {
                     </CardContent>
                 </CardActionArea>
                 <CardActions className={classes.CardActions} disableSpacing>
-                    <Button color='secondary' onClick={openProject} className={classes.CardProject}>{project.name}</Button>
+                    <Button color='secondary' onClick={openProject} className={classes.CardProject}>{props.project.name}</Button>
                     <IconButton color='secondary' onClick={openIssue}>
                         <Edit />
                     </IconButton>
@@ -99,10 +98,23 @@ export default function IssueItem(props) {
                 </CardActions>
             </Card>
             <DeleteConfirmationDialog
-                title={title}
+                title={props.title}
                 status={state.deleteConfirmationUI}
                 onDelete={handleDelete}
                 onCancel={handleDeleteCanceled} />
         </React.Fragment>
     );
 }
+
+IssueItem.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    status: PropTypes.number.isRequired,
+    project: PropTypes.object.isRequired,
+    labels: PropTypes.object.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+}
+
+export default IssueItem;
