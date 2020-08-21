@@ -1,6 +1,6 @@
 {
-  "name": "go-issue-tracker-ui-react",
-  "version": "0.0.2",
+  "name": "go-issue-tracker-web",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.2",

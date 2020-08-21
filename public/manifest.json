@@ -1,6 +1,6 @@
 {
-  "short_name": "Go-Issue-Tracker-UI-React",
-  "name": "Go Issue Tracker UI with React",
+  "short_name": "Go-Issue-Tracker-Web",
+  "name": "Go Issue Tracker Web",
   "icons": [
     {
       "src": "favicon.ico",

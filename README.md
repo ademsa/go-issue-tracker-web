@@ -1,3 +1,3 @@
-# go-issue-tracker-ui-react
+# Go Issue Tracker Web
 
-Go Issue Tracker UI with React
+A very basic Web client for Go Issue Tracker project (https://github.com/ademsa/go-issue-tracker)
