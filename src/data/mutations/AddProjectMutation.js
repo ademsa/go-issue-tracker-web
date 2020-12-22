@@ -48,4 +48,6 @@ function commit(environment, name, description, onError, onCompleted, onUpdated)
     })
 }
 
-export default { commit }
+const exports = { commit }
+
+export default exports
