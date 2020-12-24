@@ -33,7 +33,7 @@ function LabelsAutocomplete(props) {
                     input: classes.AutocompleteInput,
                     tag: classes.AutocompleteTag,
                 }}
-                renderInput={(params) => (<TextField {...params} variant='outlined' />)} />
+                renderInput={(params) => (<TextField {...params} variant='outlined' error={props.error} />)} />
         </React.Fragment>
     );
 }

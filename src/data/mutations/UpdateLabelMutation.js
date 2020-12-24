@@ -36,4 +36,6 @@ function commit(environment, id, name, colorHexCode, onError, onCompleted) {
     })
 }
 
-export default { commit }
+const exports = { commit }
+
+export default exports

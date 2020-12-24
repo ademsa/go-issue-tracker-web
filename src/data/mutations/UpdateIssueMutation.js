@@ -54,4 +54,6 @@ function commit(environment, id, title, description, status, labels, onError, on
     })
 }
 
-export default { commit }
+const exports = { commit }
+
+export default exports

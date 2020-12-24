@@ -27,3 +27,4 @@ yarn-error.log*
 
 # Other
 __generated__
+.eslintcache
